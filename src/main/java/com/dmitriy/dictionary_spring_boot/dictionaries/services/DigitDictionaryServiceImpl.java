@@ -1,61 +1,48 @@
 package com.dmitriy.dictionary_spring_boot.dictionaries.services;
 
-import spring.dictionary.converters.ListToStringBuilderConverter;
-import spring.dictionary.dictionaries.repositories.IDictionaryRepository;
-import spring.dictionary.dictionaries.validation.DigitValidation;
-import spring.dictionary.dictionaries.validation.IValidator;
-import spring.dictionary.entities.DigitEntity;
-import spring.dictionary.entities.IConvertible;
-
-import java.util.List;
+import com.dmitriy.dictionary_spring_boot.dictionaries.repositories.IDigitDictionaryRepository;
+import com.dmitriy.dictionary_spring_boot.dictionaries.validation.DigitValidation;
+import com.dmitriy.dictionary_spring_boot.dictionaries.validation.IValidator;
+import com.dmitriy.dictionary_spring_boot.entities.DigitEntity;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import java.util.Optional;
 
-
+@Service
 public class DigitDictionaryServiceImpl implements IDictionaryService {
 
-    public void setConverter(ListToStringBuilderConverter listToStringBuilderConverter) {
-        this.listToStringBuilderConverter = listToStringBuilderConverter;
-    }
-
-    private final IDictionaryRepository<DigitEntity> dictionaryRepository;
-
-    private ListToStringBuilderConverter listToStringBuilderConverter;
+    private final IDigitDictionaryRepository digitDictionaryRepository;
     private final IValidator digitValidator;
 
 
-    public DigitDictionaryServiceImpl(IDictionaryRepository<DigitEntity> dictionaryRepository, IValidator digitValidator) {
-        this.dictionaryRepository = dictionaryRepository;
+    @Autowired
+    public DigitDictionaryServiceImpl(IDigitDictionaryRepository digitDictionaryRepository, IValidator digitValidator) {
+        this.digitDictionaryRepository = digitDictionaryRepository;
         this.digitValidator = digitValidator;
     }
-    @DigitValidation
+
     @Override
+    @DigitValidation
     public void add(String key, String value) {
-        if (digitValidator.validate(value)) {
-            dictionaryRepository.addEntry(key, value);
-        } else {
-            System.out.println("Неверный формат");
-        }
+        DigitEntity digitEntity = new DigitEntity();
+        digitEntity.setDigitKey(key);
+        digitEntity.setDigitValue(value);
+        digitDictionaryRepository.save(digitEntity);
     }
 
     @Override
     public void delete(String key) {
-        dictionaryRepository.deleteEntry(key);
+        digitDictionaryRepository.deleteByDigitKey(key);
     }
+
     public String viewDictionaryContents() {
         System.out.println("Содержимое цифрового словаря: ");
-        List<IConvertible> listFromDictionary = dictionaryRepository.getDictionary();
-        StringBuilder dictionaryContents = listToStringBuilderConverter.convert(listFromDictionary);
 
-        return dictionaryContents.toString();
+        return digitDictionaryRepository.findAll().toString();
     }
 
     @Override
     public Optional<String> findEntry(String key) {
-        return dictionaryRepository.findEntry(key);
-    }
-
-    @Override
-    public int getType() {
-        return 2;
+        return digitDictionaryRepository.findDigitValueByDigitKey(key);
     }
 }

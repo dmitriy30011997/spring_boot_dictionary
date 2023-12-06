@@ -1,7 +1,5 @@
 package com.dmitriy.dictionary_spring_boot.dictionaries.services;
 
-import spring.dictionary.converters.ListToStringBuilderConverter;
-
 import java.util.Optional;
 
 public interface IDictionaryService {
@@ -9,6 +7,4 @@ public interface IDictionaryService {
     void delete(String key);
     String viewDictionaryContents();
     Optional findEntry(String key);
-    int getType();
-    void setConverter(ListToStringBuilderConverter listToStringBuilderConverter);
 }

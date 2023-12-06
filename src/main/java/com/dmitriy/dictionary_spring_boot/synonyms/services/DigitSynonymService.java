@@ -1,6 +1,9 @@
 package com.dmitriy.dictionary_spring_boot.synonyms.services;
 
-import spring.dictionary.synonyms.repositories.ISynonymRepository;
+
+
+import com.dmitriy.dictionary_spring_boot.synonyms.repositories.ISynonymRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 

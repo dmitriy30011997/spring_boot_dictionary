@@ -1,65 +1,47 @@
 package com.dmitriy.dictionary_spring_boot.dictionaries.services;
 
-import spring.dictionary.converters.ListToStringBuilderConverter;
-import spring.dictionary.dictionaries.repositories.IDictionaryRepository;
-import spring.dictionary.dictionaries.validation.IValidator;
-import spring.dictionary.dictionaries.validation.LatinValidation;
-import spring.dictionary.entities.IConvertible;
-import spring.dictionary.entities.LatinEntity;
-
-import java.util.List;
+import com.dmitriy.dictionary_spring_boot.dictionaries.repositories.ILatinDictionaryRepository;
+import com.dmitriy.dictionary_spring_boot.dictionaries.validation.IValidator;
+import com.dmitriy.dictionary_spring_boot.dictionaries.validation.LatinValidation;
+import com.dmitriy.dictionary_spring_boot.entities.LatinEntity;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import java.util.Optional;
 
-
+@Service
 public class LatinDictionaryServiceImpl implements IDictionaryService {
 
-    private final IDictionaryRepository<LatinEntity> dictionaryRepository;
-    private ListToStringBuilderConverter converter;
+    private final ILatinDictionaryRepository latinDictionaryRepository;
     private final IValidator latinValidator;
 
-
-    public void setConverter(ListToStringBuilderConverter listToStringBuilderConverter) {
-        this.converter = listToStringBuilderConverter;
-    }
-
-    public LatinDictionaryServiceImpl(IDictionaryRepository<LatinEntity> dictionaryRepository, IValidator latinValidator) {
-        this.dictionaryRepository = dictionaryRepository;
+    @Autowired
+    public LatinDictionaryServiceImpl(ILatinDictionaryRepository latinDictionaryRepository, IValidator latinValidator) {
+        this.latinDictionaryRepository = latinDictionaryRepository;
         this.latinValidator = latinValidator;
     }
 
-    @LatinValidation
     @Override
+    @LatinValidation
     public void add(String key, String value) {
-        if (latinValidator.validate(value)) {
-            dictionaryRepository.addEntry(key, value);
-        } else {
-            System.out.println("Неверный формат");
-        }
+        LatinEntity latinEntity = new LatinEntity();
+        latinEntity.setLatinKey(key);
+        latinEntity.setLatinValue(value);
+        latinDictionaryRepository.save(latinEntity);
     }
 
     @Override
     public void delete(String key) {
-        dictionaryRepository.deleteEntry(key);
+        latinDictionaryRepository.deleteByLatinKey(key);
     }
 
+    @Override
     public String viewDictionaryContents() {
-        System.out.println("Содержимое латинского словаря: ");
-        List<IConvertible> listFromDictionary = dictionaryRepository.getDictionary();
-        StringBuilder dictionaryContents = converter.convert(listFromDictionary);
 
-        return dictionaryContents.toString();
+        return latinDictionaryRepository.findAll().toString();
     }
-
 
     @Override
     public Optional<String> findEntry(String key) {
-        return dictionaryRepository.findEntry(key);
+        return latinDictionaryRepository.findLatinValueByLatinKey(key);
     }
-
-
-    @Override
-    public int getType() {
-        return 1;
-    }
-
 }

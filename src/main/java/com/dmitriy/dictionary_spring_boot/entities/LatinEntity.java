@@ -1,6 +1,15 @@
 package com.dmitriy.dictionary_spring_boot.entities;
 
-import javax.persistence.*;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -60,5 +69,10 @@ public class LatinEntity implements Serializable, IConvertible {
 
     public void setSynonyms(List<LatinSynonymEntity> synonyms) {
         this.synonyms = synonyms;
+    }
+
+    @Override
+    public String toString() {
+        return latinKey + " : " + latinValue + "\n";
     }
 }

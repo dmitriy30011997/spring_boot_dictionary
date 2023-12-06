@@ -1,8 +1,9 @@
 package com.dmitriy.dictionary_spring_boot.synonyms.services;
 
-import spring.dictionary.synonyms.repositories.ISynonymRepository;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import com.dmitriy.dictionary_spring_boot.synonyms.repositories.ISynonymRepository;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 

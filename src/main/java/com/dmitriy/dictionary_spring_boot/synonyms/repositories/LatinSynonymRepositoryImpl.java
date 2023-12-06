@@ -1,12 +1,11 @@
 package com.dmitriy.dictionary_spring_boot.synonyms.repositories;
 
+import com.dmitriy.dictionary_spring_boot.entities.LatinSynonymEntity;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.criteria.*;
 import org.springframework.stereotype.Repository;
-import spring.dictionary.entities.LatinSynonymEntity;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.criteria.*;
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Repository
@@ -16,7 +15,6 @@ public class LatinSynonymRepositoryImpl implements ISynonymRepository {
     EntityManager entityManager;
 
     @Override
-    @Transactional
     public void addSynonym(String word, String synonym) {
         LatinSynonymEntity synonymEntity = new LatinSynonymEntity();
         synonymEntity.setWord(word);
@@ -25,7 +23,6 @@ public class LatinSynonymRepositoryImpl implements ISynonymRepository {
     }
 
     @Override
-    @Transactional
     public void deleteSynonym(String synonym) {
         CriteriaBuilder builder = entityManager.getCriteriaBuilder();
         CriteriaDelete<LatinSynonymEntity> query = builder.createCriteriaDelete(LatinSynonymEntity.class);
@@ -38,7 +35,6 @@ public class LatinSynonymRepositoryImpl implements ISynonymRepository {
 
 
     @Override
-    @Transactional
     public List<String> getSynonyms(String word) {
         CriteriaBuilder builder = entityManager.getCriteriaBuilder();
         CriteriaQuery<String> query = builder.createQuery(String.class);
