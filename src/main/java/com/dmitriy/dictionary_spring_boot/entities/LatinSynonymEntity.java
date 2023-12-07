@@ -60,6 +60,14 @@ public class LatinSynonymEntity implements Serializable, IConvertible {
         return latinEntity;
     }
 
+    public String getWord() {
+        return word;
+    }
+
+    public String getSynonym() {
+        return synonym;
+    }
+
     public void setLatinEntity(LatinEntity latinEntity) {
         this.latinEntity = latinEntity;
     }

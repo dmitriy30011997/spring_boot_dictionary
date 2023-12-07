@@ -25,6 +25,14 @@ public class DigitSynonymEntity implements Serializable, IConvertible {
     @Column(name = "word")
     private String word;
 
+    public String getWord() {
+        return word;
+    }
+
+    public String getSynonym() {
+        return synonym;
+    }
+
     @Column(name = "synonym")
     private String synonym;
 

@@ -41,7 +41,7 @@ public class LatinDictionaryServiceImpl implements IDictionaryService {
     }
 
     @Override
-    public Optional<String> findEntry(String key) {
+    public Optional<LatinEntity> findEntry(String key) {
         return latinDictionaryRepository.findLatinValueByLatinKey(key);
     }
 }
