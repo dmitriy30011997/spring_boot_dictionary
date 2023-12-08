@@ -1,6 +1,12 @@
 package com.dmitriy.dictionary_spring_boot.configs;
 
 import com.dmitriy.dictionary_spring_boot.dictionaries.validation.*;
+import com.dmitriy.dictionary_spring_boot.dictionaries.validation.digit.DigitRule;
+import com.dmitriy.dictionary_spring_boot.dictionaries.validation.digit.DigitValidation;
+import com.dmitriy.dictionary_spring_boot.dictionaries.validation.digit.DigitValidator;
+import com.dmitriy.dictionary_spring_boot.dictionaries.validation.latin.LatinRule;
+import com.dmitriy.dictionary_spring_boot.dictionaries.validation.latin.LatinValidation;
+import com.dmitriy.dictionary_spring_boot.dictionaries.validation.latin.LatinValidator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

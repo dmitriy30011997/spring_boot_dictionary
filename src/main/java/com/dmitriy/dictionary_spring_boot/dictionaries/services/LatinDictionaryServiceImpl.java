@@ -2,7 +2,7 @@ package com.dmitriy.dictionary_spring_boot.dictionaries.services;
 
 import com.dmitriy.dictionary_spring_boot.dictionaries.repositories.ILatinDictionaryRepository;
 import com.dmitriy.dictionary_spring_boot.dictionaries.validation.IValidator;
-import com.dmitriy.dictionary_spring_boot.dictionaries.validation.LatinValidation;
+import com.dmitriy.dictionary_spring_boot.dictionaries.validation.latin.LatinValidation;
 import com.dmitriy.dictionary_spring_boot.entities.LatinEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

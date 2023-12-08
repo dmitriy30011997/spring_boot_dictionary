@@ -1,7 +1,7 @@
 package com.dmitriy.dictionary_spring_boot.dictionaries.services;
 
 import com.dmitriy.dictionary_spring_boot.dictionaries.repositories.IDigitDictionaryRepository;
-import com.dmitriy.dictionary_spring_boot.dictionaries.validation.DigitValidation;
+import com.dmitriy.dictionary_spring_boot.dictionaries.validation.digit.DigitValidation;
 import com.dmitriy.dictionary_spring_boot.dictionaries.validation.IValidator;
 import com.dmitriy.dictionary_spring_boot.entities.DigitEntity;
 import org.springframework.beans.factory.annotation.Autowired;

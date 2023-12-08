@@ -1,4 +1,7 @@
-package com.dmitriy.dictionary_spring_boot.dictionaries.validation;
+package com.dmitriy.dictionary_spring_boot.dictionaries.validation.latin;
+
+import com.dmitriy.dictionary_spring_boot.dictionaries.validation.IRule;
+import com.dmitriy.dictionary_spring_boot.dictionaries.validation.IValidator;
 
 import java.util.List;
 

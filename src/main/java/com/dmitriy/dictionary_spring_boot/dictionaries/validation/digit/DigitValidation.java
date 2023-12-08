@@ -1,4 +1,4 @@
-package com.dmitriy.dictionary_spring_boot.dictionaries.validation;
+package com.dmitriy.dictionary_spring_boot.dictionaries.validation.digit;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 
@@ -8,5 +8,5 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Qualifier
-public @interface LatinValidation {
+public @interface DigitValidation {
 }
