@@ -4,6 +4,8 @@ import com.dmitriy.dictionary_spring_boot.dictionaries.repositories.latin.ILatin
 import com.dmitriy.dictionary_spring_boot.dictionaries.repositories.latin.LatinValueProjection;
 import com.dmitriy.dictionary_spring_boot.dictionaries.validation.IValidator;
 import com.dmitriy.dictionary_spring_boot.entities.LatinEntity;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
@@ -13,6 +15,7 @@ public class LatinDictionaryServiceImpl implements IDictionaryService {
 
     private final ILatinDictionaryRepository latinDictionaryRepository;
     private final IValidator latinValidator;
+    private static final Logger logger = LoggerFactory.getLogger(LatinDictionaryServiceImpl.class);
 
     @Autowired
     public LatinDictionaryServiceImpl(ILatinDictionaryRepository latinDictionaryRepository, IValidator latinValidator) {
@@ -29,7 +32,7 @@ public class LatinDictionaryServiceImpl implements IDictionaryService {
             latinDictionaryRepository.save(latinEntity);
         }
         else {
-            System.out.println("Введено некорректное значение");;
+            logger.error("Wrong key or value");
         }
     }
 
@@ -40,7 +43,6 @@ public class LatinDictionaryServiceImpl implements IDictionaryService {
 
     @Override
     public String viewDictionaryContents() {
-
         return latinDictionaryRepository.findAll().toString();
     }
 

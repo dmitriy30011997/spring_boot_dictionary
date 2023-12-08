@@ -4,6 +4,8 @@ import com.dmitriy.dictionary_spring_boot.dictionaries.repositories.digit.DigitV
 import com.dmitriy.dictionary_spring_boot.dictionaries.repositories.digit.IDigitDictionaryRepository;
 import com.dmitriy.dictionary_spring_boot.dictionaries.validation.IValidator;
 import com.dmitriy.dictionary_spring_boot.entities.DigitEntity;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +16,8 @@ public class DigitDictionaryServiceImpl implements IDictionaryService {
 
     private final IDigitDictionaryRepository digitDictionaryRepository;
     private final IValidator digitValidator;
+    private static final Logger logger = LoggerFactory.getLogger(DigitDictionaryServiceImpl.class);
+
 
 
     @Autowired
@@ -30,7 +34,7 @@ public class DigitDictionaryServiceImpl implements IDictionaryService {
             digitEntity.setDigitValue(value);
             digitDictionaryRepository.save(digitEntity);
         } else {
-            System.out.println("Введено некорректное значение");
+            logger.error("Wrong key or value");
         }
     }
 
@@ -41,8 +45,6 @@ public class DigitDictionaryServiceImpl implements IDictionaryService {
     }
 
     public String viewDictionaryContents() {
-        System.out.println("Содержимое цифрового словаря: ");
-
         return digitDictionaryRepository.findAll().toString();
     }
 
