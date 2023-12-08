@@ -1,7 +1,5 @@
 package com.dmitriy.dictionary_spring_boot.entities;
 
-
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,7 +8,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;

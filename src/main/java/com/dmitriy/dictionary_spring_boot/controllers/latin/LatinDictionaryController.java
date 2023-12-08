@@ -1,6 +1,8 @@
 package com.dmitriy.dictionary_spring_boot.controllers.latin;
 
 import com.dmitriy.dictionary_spring_boot.dictionaries.services.IDictionaryService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,6 +16,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/dictionary/latin")
+@Tag(name = "Latin Dictionary", description = "Operations related to latin dictionary")
 public class LatinDictionaryController {
 
     private final IDictionaryService latinDictionaryService;
@@ -24,21 +27,25 @@ public class LatinDictionaryController {
     }
 
     @PostMapping("/add")
+    @Operation(summary = "Add entry")
     public void addLatin(@RequestParam String key, @RequestParam String value) {
         latinDictionaryService.add(key, value);
     }
 
     @DeleteMapping("/delete")
+    @Operation(summary = "Delete entry")
     public void deleteLatin(@RequestParam String key) {
         latinDictionaryService.delete(key);
     }
 
     @GetMapping("/find")
+    @Operation(summary = "Find entry")
     public Optional<String> findLatin(@RequestParam String key) {
         return latinDictionaryService.findEntry(key);
     }
 
     @GetMapping("/all")
+    @Operation(summary = "View all entries")
     public String viewAllLatin() {
         return latinDictionaryService.viewDictionaryContents();
     }
