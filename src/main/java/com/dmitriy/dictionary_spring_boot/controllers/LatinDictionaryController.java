@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/dictionary")
+@RequestMapping("/dictionary/latin")
 public class LatinDictionaryController {
 
     private final IDictionaryService latinDictionaryService;
@@ -18,22 +18,22 @@ public class LatinDictionaryController {
         this.latinDictionaryService = latinDictionaryService;
     }
 
-    @PostMapping("/latin/add")
+    @PostMapping("/add")
     public void addLatin(@RequestParam String key, @RequestParam String value) {
         latinDictionaryService.add(key, value);
     }
 
-    @DeleteMapping("/latin/delete")
+    @DeleteMapping("/delete")
     public void deleteLatin(@RequestParam String key) {
         latinDictionaryService.delete(key);
     }
 
-    @GetMapping("/latin/find")
+    @GetMapping("/find")
     public Optional<String> findLatin(@RequestParam String key) {
         return latinDictionaryService.findEntry(key);
     }
 
-    @GetMapping("/latin/all")
+    @GetMapping("/all")
     public String viewAllLatin() {
         return latinDictionaryService.viewDictionaryContents();
     }

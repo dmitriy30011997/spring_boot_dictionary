@@ -25,6 +25,13 @@ public class DigitSynonymEntity implements Serializable, IConvertible {
     @Column(name = "word")
     private String word;
 
+    @Column(name = "synonym")
+    private String synonym;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "digit_entity_id")
+    private DigitEntity digitEntity;
+
     public String getWord() {
         return word;
     }
@@ -32,13 +39,6 @@ public class DigitSynonymEntity implements Serializable, IConvertible {
     public String getSynonym() {
         return synonym;
     }
-
-    @Column(name = "synonym")
-    private String synonym;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "digit_entity_id")
-    private DigitEntity digitEntity;
 
 
     public String getKey() {

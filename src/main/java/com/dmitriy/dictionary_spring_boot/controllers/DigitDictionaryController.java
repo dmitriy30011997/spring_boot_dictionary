@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/dictionary")
+@RequestMapping("/dictionary/digit")
 public class DigitDictionaryController {
 
     private final IDictionaryService digitDictionaryService;
@@ -18,22 +18,22 @@ public class DigitDictionaryController {
     }
 
 
-    @PostMapping("/digit/add")
+    @PostMapping("/add")
     public void add(String key, String value) {
         digitDictionaryService.add(key, value);
     }
 
-    @DeleteMapping("/digit/delete")
+    @DeleteMapping("/delete")
     public void deleteDigitEntry(@RequestParam String key) {
         digitDictionaryService.delete(key);
     }
 
-    @GetMapping("/digit/find")
+    @GetMapping("/find")
     public Optional<String> findDigitEntry(@RequestParam String key) {
         return digitDictionaryService.findEntry(key);
     }
 
-    @GetMapping("/digit/all")
+    @GetMapping("/all")
     public String viewAllDigitEntries() {
         return digitDictionaryService.viewDictionaryContents();
     }
