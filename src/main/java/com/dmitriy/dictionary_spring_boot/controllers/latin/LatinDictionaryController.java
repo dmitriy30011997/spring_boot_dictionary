@@ -1,4 +1,4 @@
-package com.dmitriy.dictionary_spring_boot.controllers;
+package com.dmitriy.dictionary_spring_boot.controllers.latin;
 
 import com.dmitriy.dictionary_spring_boot.dictionaries.services.IDictionaryService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.dmitriy.dictionary_spring_boot.controllers;
+package com.dmitriy.dictionary_spring_boot.controllers.digit;
 
 import com.dmitriy.dictionary_spring_boot.synonyms.services.ISynonymService;
 import org.springframework.beans.factory.annotation.Autowired;
