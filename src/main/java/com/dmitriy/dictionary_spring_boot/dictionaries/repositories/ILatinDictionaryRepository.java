@@ -12,6 +12,6 @@ import java.util.Optional;
 public interface ILatinDictionaryRepository extends JpaRepository<LatinEntity, Long> {
 
     void deleteByLatinKey(String latinKey);
-        Optional<LatinEntity> findLatinValueByLatinKey(@Param("key") String latinKey);
+    Optional<LatinEntity> findLatinValueByLatinKey(@Param("key") String latinKey);
     }
 

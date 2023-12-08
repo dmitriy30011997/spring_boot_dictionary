@@ -21,12 +21,16 @@ public class LatinDictionaryServiceImpl implements IDictionaryService {
     }
 
     @Override
-    @LatinValidation
     public void add(String key, String value) {
-        LatinEntity latinEntity = new LatinEntity();
-        latinEntity.setLatinKey(key);
-        latinEntity.setLatinValue(value);
-        latinDictionaryRepository.save(latinEntity);
+        if(latinValidator.validate(key) && latinValidator.validate(value)) {
+            LatinEntity latinEntity = new LatinEntity();
+            latinEntity.setLatinKey(key);
+            latinEntity.setLatinValue(value);
+            latinDictionaryRepository.save(latinEntity);
+        }
+        else {
+            System.out.println("Введено некорректное значение");;
+        }
     }
 
     @Override

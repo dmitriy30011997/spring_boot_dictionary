@@ -1,7 +1,6 @@
 package com.dmitriy.dictionary_spring_boot.dictionaries.services;
 
 import com.dmitriy.dictionary_spring_boot.dictionaries.repositories.IDigitDictionaryRepository;
-import com.dmitriy.dictionary_spring_boot.dictionaries.validation.digit.DigitValidation;
 import com.dmitriy.dictionary_spring_boot.dictionaries.validation.IValidator;
 import com.dmitriy.dictionary_spring_boot.entities.DigitEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,12 +23,15 @@ public class DigitDictionaryServiceImpl implements IDictionaryService {
     }
 
     @Override
-    @DigitValidation
     public void add(String key, String value) {
-        DigitEntity digitEntity = new DigitEntity();
-        digitEntity.setDigitKey(key);
-        digitEntity.setDigitValue(value);
-        digitDictionaryRepository.save(digitEntity);
+        if (digitValidator.validate(key) && digitValidator.validate(value)) {
+            DigitEntity digitEntity = new DigitEntity();
+            digitEntity.setDigitKey(key);
+            digitEntity.setDigitValue(value);
+            digitDictionaryRepository.save(digitEntity);
+        } else {
+            System.out.println("Введено некорректное значение");
+        }
     }
 
     @Override
@@ -45,7 +47,6 @@ public class DigitDictionaryServiceImpl implements IDictionaryService {
     }
 
     @Override
-    @Transactional
     public Optional<String> findEntry(String key) {
         return digitDictionaryRepository.findDigitValueByDigitKey(key);
     }
