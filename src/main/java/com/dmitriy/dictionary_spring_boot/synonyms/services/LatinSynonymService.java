@@ -1,10 +1,10 @@
 package com.dmitriy.dictionary_spring_boot.synonyms.services;
 
 import com.dmitriy.dictionary_spring_boot.entities.LatinSynonymEntity;
-import com.dmitriy.dictionary_spring_boot.synonyms.repositories.ILatinSynonymRepository;
+import com.dmitriy.dictionary_spring_boot.synonyms.repositories.latin.ILatinSynonymRepository;
+import com.dmitriy.dictionary_spring_boot.synonyms.repositories.latin.LatinSynonymProjection;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,9 +32,9 @@ public class LatinSynonymService implements ISynonymService {
 
     @Transactional(readOnly = true)
     public List<String> getSynonyms(String word) {
-        List<LatinSynonymEntity> synonymEntities = latinSynonymRepository.findByWord(word);
+        List<LatinSynonymProjection> synonymEntities = latinSynonymRepository.findByWord(word);
         return synonymEntities.stream()
-                .map(LatinSynonymEntity::getSynonym)
+                .map(LatinSynonymProjection::getSynonym)
                 .collect(Collectors.toList());
     }
 }

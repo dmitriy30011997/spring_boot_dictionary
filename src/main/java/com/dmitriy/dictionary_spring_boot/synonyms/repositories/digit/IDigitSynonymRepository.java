@@ -1,4 +1,4 @@
-package com.dmitriy.dictionary_spring_boot.synonyms.repositories;
+package com.dmitriy.dictionary_spring_boot.synonyms.repositories.digit;
 
 import com.dmitriy.dictionary_spring_boot.entities.DigitSynonymEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -9,7 +9,7 @@ import java.util.List;
 
 @Repository
 public interface IDigitSynonymRepository extends JpaRepository<DigitSynonymEntity, Long> {
-    List<DigitSynonymEntity> findByWord(String word);
+    List<DigitWordProjection> findByWord(String word);
     @Transactional
     void deleteBySynonym(String synonym);
 }

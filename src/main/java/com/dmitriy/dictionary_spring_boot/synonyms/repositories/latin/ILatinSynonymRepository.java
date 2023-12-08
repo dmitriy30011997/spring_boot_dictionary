@@ -1,4 +1,4 @@
-package com.dmitriy.dictionary_spring_boot.synonyms.repositories;
+package com.dmitriy.dictionary_spring_boot.synonyms.repositories.latin;
 
 import com.dmitriy.dictionary_spring_boot.entities.LatinSynonymEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -9,7 +9,7 @@ import java.util.List;
 
 @Repository
 public interface ILatinSynonymRepository extends JpaRepository<LatinSynonymEntity, Long> {
-    List<LatinSynonymEntity> findByWord(String word);
+    List<LatinSynonymProjection> findByWord(String word);
     @Transactional
     void deleteBySynonym(String synonym);
 }

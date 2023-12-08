@@ -1,6 +1,7 @@
 package com.dmitriy.dictionary_spring_boot.dictionaries.services;
 
-import com.dmitriy.dictionary_spring_boot.dictionaries.repositories.ILatinDictionaryRepository;
+import com.dmitriy.dictionary_spring_boot.dictionaries.repositories.latin.ILatinDictionaryRepository;
+import com.dmitriy.dictionary_spring_boot.dictionaries.repositories.latin.LatinValueProjection;
 import com.dmitriy.dictionary_spring_boot.dictionaries.validation.IValidator;
 import com.dmitriy.dictionary_spring_boot.entities.LatinEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +45,7 @@ public class LatinDictionaryServiceImpl implements IDictionaryService {
     }
 
     @Override
-    public Optional<LatinEntity> findEntry(String key) {
+    public Optional<LatinValueProjection> findEntry(String key) {
         return latinDictionaryRepository.findLatinValueByLatinKey(key);
     }
 }

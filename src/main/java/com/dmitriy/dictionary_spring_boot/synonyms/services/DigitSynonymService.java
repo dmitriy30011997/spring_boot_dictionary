@@ -1,7 +1,8 @@
 package com.dmitriy.dictionary_spring_boot.synonyms.services;
 
 import com.dmitriy.dictionary_spring_boot.entities.DigitSynonymEntity;
-import com.dmitriy.dictionary_spring_boot.synonyms.repositories.IDigitSynonymRepository;
+import com.dmitriy.dictionary_spring_boot.synonyms.repositories.digit.DigitWordProjection;
+import com.dmitriy.dictionary_spring_boot.synonyms.repositories.digit.IDigitSynonymRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,9 +33,9 @@ public class DigitSynonymService implements ISynonymService {
 
     @Transactional(readOnly = true)
     public List<String> getSynonyms(String word) {
-        List<DigitSynonymEntity> synonymEntities = digitSynonymRepository.findByWord(word);
+        List<DigitWordProjection> synonymEntities = digitSynonymRepository.findByWord(word);
         return synonymEntities.stream()
-                .map(DigitSynonymEntity::getSynonym)
+                .map(DigitWordProjection::getSynonym)
                 .collect(Collectors.toList());
     }
 }
