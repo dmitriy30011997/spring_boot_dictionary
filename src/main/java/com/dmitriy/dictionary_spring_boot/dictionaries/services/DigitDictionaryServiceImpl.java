@@ -4,9 +4,13 @@ import com.dmitriy.dictionary_spring_boot.dictionaries.repositories.digit.DigitV
 import com.dmitriy.dictionary_spring_boot.dictionaries.repositories.digit.IDigitDictionaryRepository;
 import com.dmitriy.dictionary_spring_boot.dictionaries.validation.IValidator;
 import com.dmitriy.dictionary_spring_boot.entities.DigitEntity;
+import com.dmitriy.dictionary_spring_boot.entities.LatinEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
@@ -43,9 +47,10 @@ public class DigitDictionaryServiceImpl implements IDictionaryService {
     public void delete(String key) {
         digitDictionaryRepository.deleteByDigitKey(key);
     }
-
-    public String viewDictionaryContents() {
-        return digitDictionaryRepository.findAll().toString();
+    @Override
+    public Page<DigitEntity> viewDictionaryContents(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return digitDictionaryRepository.findAll(pageable);
     }
 
     @Override

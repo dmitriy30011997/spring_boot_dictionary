@@ -1,10 +1,12 @@
 package com.dmitriy.dictionary_spring_boot.controllers.latin;
 
 import com.dmitriy.dictionary_spring_boot.dictionaries.services.IDictionaryService;
+import com.dmitriy.dictionary_spring_boot.entities.LatinEntity;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -45,8 +47,11 @@ public class LatinDictionaryController {
     }
 
     @GetMapping("/all")
-    @Operation(summary = "View all entries")
-    public String viewAllLatin() {
-        return latinDictionaryService.viewDictionaryContents();
+    @Operation(summary = "View all entries with pagination")
+    public Page<LatinEntity> viewAllLatin(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size
+    ) {
+        return latinDictionaryService.viewDictionaryContents(page, size);
     }
 }

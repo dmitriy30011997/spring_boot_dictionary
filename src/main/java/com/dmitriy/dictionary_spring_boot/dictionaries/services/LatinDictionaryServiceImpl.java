@@ -7,6 +7,9 @@ import com.dmitriy.dictionary_spring_boot.entities.LatinEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
 
@@ -42,8 +45,9 @@ public class LatinDictionaryServiceImpl implements IDictionaryService {
     }
 
     @Override
-    public String viewDictionaryContents() {
-        return latinDictionaryRepository.findAll().toString();
+    public Page<LatinEntity> viewDictionaryContents(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return latinDictionaryRepository.findAll(pageable);
     }
 
     @Override
