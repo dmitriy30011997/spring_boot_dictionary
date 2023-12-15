@@ -4,7 +4,7 @@ import com.dmitriy.dictionary_spring_boot.dictionaries.repositories.digit.DigitV
 import com.dmitriy.dictionary_spring_boot.dictionaries.repositories.digit.IDigitDictionaryRepository;
 import com.dmitriy.dictionary_spring_boot.dictionaries.validation.IValidator;
 import com.dmitriy.dictionary_spring_boot.entities.DigitEntity;
-import com.dmitriy.dictionary_spring_boot.entities.LatinEntity;
+import com.dmitriy.dictionary_spring_boot.exceptions.InvalidInputException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +20,6 @@ public class DigitDictionaryServiceImpl implements IDictionaryService {
 
     private final IDigitDictionaryRepository digitDictionaryRepository;
     private final IValidator digitValidator;
-    private static final Logger logger = LoggerFactory.getLogger(DigitDictionaryServiceImpl.class);
-
-
-
     @Autowired
     public DigitDictionaryServiceImpl(IDigitDictionaryRepository digitDictionaryRepository, IValidator digitValidator) {
         this.digitDictionaryRepository = digitDictionaryRepository;
@@ -38,7 +34,7 @@ public class DigitDictionaryServiceImpl implements IDictionaryService {
             digitEntity.setDigitValue(value);
             digitDictionaryRepository.save(digitEntity);
         } else {
-            logger.error("Wrong key or value");
+            throw new InvalidInputException("Введено некорректное значение");
         }
     }
 
