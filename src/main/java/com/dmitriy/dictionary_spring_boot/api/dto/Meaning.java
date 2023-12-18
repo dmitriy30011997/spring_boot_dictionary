@@ -1,4 +1,4 @@
-package com.dmitriy.dictionary_spring_boot.api;
+package com.dmitriy.dictionary_spring_boot.api.dto;
 
 import java.util.List;
 

@@ -1,5 +1,7 @@
-package com.dmitriy.dictionary_spring_boot.api;
+package com.dmitriy.dictionary_spring_boot.api.services;
 
+import com.dmitriy.dictionary_spring_boot.api.dto.WordDefinition;
+import com.dmitriy.dictionary_spring_boot.api.feigns.DictionaryAPI;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
